@@ -33,7 +33,7 @@ const keys = {
 };
 
 const backGround = new Sprite({
-  possition: {
+  position: {
     x: 0,
     y: 0,
   },
@@ -41,7 +41,7 @@ const backGround = new Sprite({
 });
 
 const bird = new Sprite({
-  possition: {
+  position: {
     x: 50,
     y: 100,
   },
@@ -51,7 +51,7 @@ const bird = new Sprite({
 });
 
 const player1 = new Fighter({
-  possition: { x: 0, y: 0 },
+  position: { x: 0, y: 0 },
   velocity: { x: 20, y: 10 },
   color: "green",
   offset: {
@@ -145,7 +145,7 @@ const player1 = new Fighter({
 });
 
 const enmy = new Fighter({
-  possition: { x: 450, y: 100 },
+  position: { x: 450, y: 100 },
   velocity: { x: 0, y: 10 },
   color: "blue",
   offset: {
@@ -253,18 +253,18 @@ function animate() {
   player1.velocity.x = 0;
   enmy.velocity.x = 0;
 
-  if (player1.possition.x < -100) {
-    player1.possition.x = 960;
+  if (player1.position.x < -100) {
+    player1.position.x = 960;
   }
-  if (player1.possition.x >= 1000) {
-    player1.possition.x = 0;
+  if (player1.position.x >= 1000) {
+    player1.position.x = 0;
   }
 
-  if (enmy.possition.x < -100) {
-    enmy.possition.x = 960;
+  if (enmy.position.x < -100) {
+    enmy.position.x = 960;
   }
-  if (enmy.possition.x >= 1000) {
-    enmy.possition.x = 0;
+  if (enmy.position.x >= 1000) {
+    enmy.position.x = 0;
   }
 
   //jumping

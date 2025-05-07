@@ -1,12 +1,12 @@
 class Sprite {
   constructor({
-    possition,
+    position,
     imgSrc,
     scale = 1,
     framesMax = 1,
     offset = { x: 0, y: 0 },
   }) {
-    this.possition = possition;
+    this.position = position;
     this.width = 50;
     this.height = 150;
     this.img = new Image();
@@ -26,8 +26,8 @@ class Sprite {
       0,
       this.img.width / this.framesMax,
       this.img.height,
-      this.possition.x - this.offset.x,
-      this.possition.y - this.offset.y,
+      this.position.x - this.offset.x,
+      this.position.y - this.offset.y,
       (this.img.width / this.framesMax) * this.scale,
       this.img.height * this.scale
     );
@@ -50,7 +50,7 @@ class Sprite {
 
 class Fighter extends Sprite {
   constructor({
-    possition,
+    position,
     velocity,
     color = "red",
     imgSrc,
@@ -61,13 +61,13 @@ class Fighter extends Sprite {
     offset = { x: 0, y: 0 },
   }) {
     super({
-      possition,
+      position,
       imgSrc,
       scale,
       framesMax,
       offset,
     });
-    this.possition = possition;
+    this.position = position;
     this.velocity = velocity;
     this.width = 50;
     this.height = 150;
@@ -75,9 +75,9 @@ class Fighter extends Sprite {
     this.color = color;
     this.isAttacking;
     this.attackBox = {
-      possition: {
-        x: this.possition.x,
-        y: this.possition.y,
+      position: {
+        x: this.position.x,
+        y: this.position.y,
       },
       offset: attackBox.offset,
       width: attackBox.width,
@@ -97,60 +97,35 @@ class Fighter extends Sprite {
     console.log(this.sprites);
   }
 
-  // drow() {
-  //   ctx.fillStyle = this.color;
-
-  //   ctx.fillRect(this.possition.x, this.possition.y, this.width, this.height);
-  //   //attackBox
-  //   if (this.isAttacking) {
-  //     ctx.fillStyle = "white";
-  //     ctx.fillRect(
-  //       this.attackBox.possition.x,
-  //       this.attackBox.possition.y,
-  //       this.attackBox.width,
-  //       this.attackBox.height
-  //     );
-  //   }
-  // }
 
   getHit() {
-    this.health -= 20;
+    this.health -= 20; // or whatever damage is
     if (this.health <= 0) {
       this.switchSprite("death");
+      this.dead = true;
     } else {
       this.switchSprite("getHit");
     }
-    // this.isAttacking = true;
   }
-
   update() {
     this.drow();
     if (!this.dead) this.animateFrames();
-    //attackBox
-    this.attackBox.possition.x = this.possition.x + this.attackBox.offset.x;
-    this.attackBox.possition.y = this.possition.y + this.attackBox.offset.y;
+    this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
+    this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
 
-    // draw attackBox
-    // ctx.fillRect(
-    //   this.attackBox.possition.x,
-    //   this.attackBox.possition.y,
-    //   this.attackBox.width,
-    //   this.attackBox.height
-    // );
 
-    this.possition.y += this.velocity.y;
-    this.possition.x += this.velocity.x;
 
-    //gravity function
+    this.position.y += this.velocity.y;
+    this.position.x += this.velocity.x;
+
     if (
-      this.possition.y + this.height + this.velocity.y >=
+      this.position.y + this.height + this.velocity.y >=
       canvas.height - 70
     ) {
       this.velocity.y = 0;
-      this.possition.y = 356;
+      this.position.y = 356;
     } else this.velocity.y += gravity;
-    // console.log(this.possition.y);
-    // console.log("done");
+
   }
 
   attack(num) {
@@ -162,8 +137,7 @@ class Fighter extends Sprite {
         this.switchSprite("attack2");
         break;
       case "3":
-        // enmy.velocity.y = -5;
-        // enmy.velocity.x = -15;
+
         this.switchSprite("attack3");
         break;
       case "4":
@@ -171,9 +145,7 @@ class Fighter extends Sprite {
         break;
     }
     this.isAttacking = true;
-    // setTimeout(() => {
-    //   this.isAttacking = false;
-    // }, 1000);
+
   }
   switchSprite(sprite) {
     if (this.img === this.sprites.death.img) {
@@ -223,7 +195,6 @@ class Fighter extends Sprite {
         if (this.img !== this.sprites.runBack.img) {
           this.img = this.sprites.runBack.img;
           this.framesMax = this.sprites.runBack.framesMax;
-          // this.scale = this.sprites.runBack.scale;
           this.currentFrame = 0;
         }
         break;

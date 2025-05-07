@@ -1,13 +1,13 @@
 function rectangularCollision({ rectangular1, rectangular2 }) {
   return (
-    rectangular1.attackBox.possition.x + rectangular1.attackBox.width >=
-      rectangular2.possition.x &&
-    rectangular1.attackBox.possition.x <=
-      rectangular2.possition.x + rectangular2.width &&
-    rectangular1.attackBox.possition.y + rectangular1.attackBox.height >=
-      rectangular2.attackBox.possition.y &&
-    rectangular1.attackBox.possition.y <=
-      rectangular2.possition.y + rectangular2.height
+    rectangular1.attackBox.position.x + rectangular1.attackBox.width >=
+    rectangular2.position.x &&
+    rectangular1.attackBox.position.x <=
+    rectangular2.position.x + rectangular2.width &&
+    rectangular1.attackBox.position.y + rectangular1.attackBox.height >=
+    rectangular2.attackBox.position.y &&
+    rectangular1.attackBox.position.y <=
+    rectangular2.position.y + rectangular2.height
   );
 }
 
